@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <Navbar />
 
         {/* Main container with flex-grow to take up remaining space */}
-        <div className="mx-auto px-0 w-full h-full h-4/5">
+        <div className="mx-auto px-0 w-full h-full ">
           {children}
         </div>
 
