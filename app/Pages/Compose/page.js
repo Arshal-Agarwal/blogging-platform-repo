@@ -64,12 +64,13 @@ export default function Compose() {
 
 
     return (
-        <div className=" min-w-64 mt-6 pl-24">
+        <div className=" min-w-64  pl-24  ">
+            <br /><br /> <br />  <br />
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
             <input className="title w-3/4 p-2  border border-gray-300 rounded mt-2 block" ref={title_ref} type="text" value={Title} onChange={titleChange} placeholder='Input Title here' />
 
             <div className='pr-16 mt-8'>
-                <label htmlFor="Description" className="block text-xs text-gray-500 dark:text-gray-300">Tags:  </label>
+                <label htmlFor="Description" className="block text-xs text-gray-500 dark:text-gray-300">Tags: {Tags.toUpperCase()} </label>
 
                 <textarea ref={blog_ref} id="content" onChange={(e) => blogChange(e)} value={blogContent} placeholder="Enter blog content" className="block  mt-2  w-full  rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600  dark:text-gray-300 dark:focus:border-blue-300"></textarea>
             </div>
@@ -100,17 +101,17 @@ export default function Compose() {
             </div>
             }
 
-            {showAlert && <div class="flex ml-auto mr-16  max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <div class="flex items-center justify-center w-12 bg-emerald-500">
-                    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            {showAlert && <div className="flex ml-auto mr-16  max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div className="flex items-center justify-center w-12 bg-emerald-500">
+                    <svg className="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
                     </svg>
                 </div>
 
-                <div class="px-4 py-2 -mx-3">
-                    <div class="mx-3">
-                        <span class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
-                        <p class="text-sm text-gray-600 dark:text-gray-200">Your Blog is submitted</p>
+                <div className="px-4 py-2 -mx-3">
+                    <div className="mx-3">
+                        <span className="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
+                        <p className="text-sm text-gray-600 dark:text-gray-200">Your Blog is submitted</p>
                     </div>
                 </div>
             </div>}
