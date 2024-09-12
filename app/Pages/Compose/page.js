@@ -64,13 +64,12 @@ export default function Compose() {
 
 
     return (
-        <div className=" min-w-64  pl-24  ">
-            <br /><br /> <br />  <br />
+        <div className=" min-w-64 mt-6 pl-24">
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
             <input className="title w-3/4 p-2  border border-gray-300 rounded mt-2 block" ref={title_ref} type="text" value={Title} onChange={titleChange} placeholder='Input Title here' />
 
             <div className='pr-16 mt-8'>
-                <label htmlFor="Description" className="block text-xs text-gray-500 dark:text-gray-300">Tags: {Tags.toUpperCase()} </label>
+                <label htmlFor="Description" className="block text-xs text-gray-500 dark:text-gray-300">Tags:  </label>
 
                 <textarea ref={blog_ref} id="content" onChange={(e) => blogChange(e)} value={blogContent} placeholder="Enter blog content" className="block  mt-2  w-full  rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600  dark:text-gray-300 dark:focus:border-blue-300"></textarea>
             </div>
@@ -100,6 +99,7 @@ export default function Compose() {
             </button>
             </div>
             }
+
 
             {showAlert && <div className="flex ml-auto mr-16  max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <div className="flex items-center justify-center w-12 bg-emerald-500">
