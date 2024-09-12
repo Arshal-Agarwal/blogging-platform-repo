@@ -21,28 +21,28 @@ export default function Compose() {
     function submitClick() {
         let Blog_Content = blog_ref.current.value;               //When connecting backend , add this Blog_Content in db
         let Blog_Title = title_ref.current.value;                //When connecting backend , add this Blog_title in db
-        console.log("Blog content : " + Blog_Content);
         console.log("Blog title " + Blog_Title);
+        console.log("Blog content : " + Blog_Content);
         setshowAlert(true);
         setTimeout(() => {
             setshowAlert(false);
-        },1500);
+        }, 1500);
 
     }
 
-    function onClearClick(){
-          setblogContent("");
-          setTitle("");  
+    function onClearClick() {
+        setTitle("");
+        setblogContent("");
     }
 
-    function onTagClick(){
+    function onTagClick() {
         setTimeout(() => {
             tag_ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
         }, 0);
         setshowTagInput(true);
-        
+
     }
-    
+
 
     function blogChange(e) {
         setblogContent(e.target.value)
@@ -52,19 +52,20 @@ export default function Compose() {
         setTitle(ev.target.value);
     }
 
-    function onSubmitTagClick(){
+    function onSubmitTagClick() {
 
         setshowTagInput(false);
     }
 
-    function tagsChange(e1){
+    function tagsChange(e1) {
         setTags(e1.target.value);
     }
 
 
 
     return (
-        <div className=" min-w-64 mt-6 pl-24">
+        <div className=" min-w-64  pl-24">
+            <br /><br /> <br /> <br />
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
             <input className="title w-3/4 p-2  border border-gray-300 rounded mt-2 block" ref={title_ref} type="text" value={Title} onChange={titleChange} placeholder='Input Title here' />
 
@@ -76,7 +77,7 @@ export default function Compose() {
 
             <button onClick={submitClick} className="mt-6  px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                 {/* <Link href="/"> */}
-                    Submit
+                Submit
                 {/* </Link> */}
             </button>
 
@@ -92,11 +93,15 @@ export default function Compose() {
                 Add Tags
             </button>
 
-            {showTagInput && <div className="tags">
-            <input className="tags w-3/4 p-2  border border-gray-300 rounded mt-10" ref={tag_ref} type="text" placeholder='Input Tags here , Separate them with a space' value={Tags} onChange={(e)=>tagsChange(e)}/>
-            <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" onClick={onSubmitTagClick}>
-                Submit Tags
+            <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" >
+                Image
             </button>
+
+            {showTagInput && <div className="tags">
+                <input className="tags w-3/4 p-2  border border-gray-300 rounded mt-10" ref={tag_ref} type="text" placeholder='Input Tags here , Separate them with a space' value={Tags} onChange={(e) => tagsChange(e)} />
+                <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" onClick={onSubmitTagClick}>
+                    Submit Tags
+                </button>
             </div>
             }
 
