@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import Image from "next/image";
 
 
 const Navbar = () => {
@@ -9,10 +10,10 @@ const Navbar = () => {
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
-                        <a href="#">
+                        <Link href="/">
                             <p className="heading font-bold text-3xl"  >Blog.</p>
-                        </a>
-
+                        </Link>
+                        
                         {/* Mobile menu button */}
                         <div className="flex lg:hidden">
                             <button
@@ -35,12 +36,12 @@ const Navbar = () => {
                             <Link href="/" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Home</Link>
                             <Link href="/Pages/Compose" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Compose Blog</Link>
                             <Link href="/Pages/Profile" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">My Profile</Link>
-                            <Link href="/Pages/SignUp" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Sign in</Link>
+                            <Link href="/Pages/SignIn" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Sign in</Link>
 
                         </div>
 
                         <div className="flex items-center mt-4 lg:mt-0">
-                           
+
 
                             <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
                                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
