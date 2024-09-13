@@ -3,7 +3,7 @@ import React from 'react'
 export default function BlogContentCard() {
   return (
     
-            <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 float-right mr-64 mt-10 mb-8">
+            <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 float-right  mt-10 mr-10">
                 <div className="flex items-center justify-between">
                     <span className="text-sm font-light text-gray-600 dark:text-gray-400">u/Arshal11</span>
                     <a className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabindex="0" role="button">Design</a>
