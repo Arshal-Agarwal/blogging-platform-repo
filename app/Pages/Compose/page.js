@@ -8,14 +8,17 @@ export default function Compose() {
 
     const [showAlert, setshowAlert] = useState(false);
     const [showTagInput, setshowTagInput] = useState(false);
+    const [showCategoryInput, setshowCategoryInput] = useState(false);
     const [blogContent, setblogContent] = useState("");
     const [Title, setTitle] = useState("");
     const [Tags, setTags] = useState("");
+    const [Category, setCategory] = useState("");
 
 
     let blog_ref = useRef();
     let title_ref = useRef();
     let tag_ref = useRef();
+    let cat_ref = useRef();
 
 
     function submitClick() {
@@ -39,7 +42,20 @@ export default function Compose() {
         setTimeout(() => {
             tag_ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
         }, 0);
-        setshowTagInput(true);
+        setshowTagInput(!showTagInput);
+
+    }
+
+    function onCategoryClick() {
+        
+        setTimeout(() => {
+            
+            cat_ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+        } , 0);
+        
+        
+        setshowCategoryInput(!showCategoryInput);
 
     }
 
@@ -57,15 +73,24 @@ export default function Compose() {
         setshowTagInput(false);
     }
 
+    function onSubmitCategoryClick() {
+
+        setshowCategoryInput(false); 
+    }
+
     function tagsChange(e1) {
         setTags(e1.target.value);
+    }
+
+    function catsChange(e2) {
+        setCategory(e2.target.value);
     }
 
 
 
     return (
-        <div className=" min-w-64  pl-24">
-            <br /><br /> <br /> <br />
+        <div className=" min-w-64  pl-24 mt-4">
+            
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
             <input className="title w-3/4 p-2  border border-gray-300 rounded mt-2 block" ref={title_ref} type="text" value={Title} onChange={titleChange} placeholder='Input Title here' />
 
@@ -93,6 +118,10 @@ export default function Compose() {
                 Add Tags
             </button>
 
+            <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" onClick={onCategoryClick}>
+                Category
+            </button>
+
             <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" >
                 Image
             </button>
@@ -101,6 +130,14 @@ export default function Compose() {
                 <input className="tags w-3/4 p-2  border border-gray-300 rounded mt-10" ref={tag_ref} type="text" placeholder='Input Tags here , Separate them with a space' value={Tags} onChange={(e) => tagsChange(e)} />
                 <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" onClick={onSubmitTagClick}>
                     Submit Tags
+                </button>
+            </div>
+            }
+
+            {showCategoryInput && <div className="category">
+                <input className="tags w-3/4 p-2  border border-gray-300 rounded mt-10" ref={cat_ref} type="text" placeholder='Input Tags here , Separate them with a space' value={Category} onChange={(e) => catsChange(e)} />
+                <button className="px-6 ml-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" onClick={onSubmitCategoryClick}>
+                    Submit Category
                 </button>
             </div>
             }
@@ -120,6 +157,7 @@ export default function Compose() {
                     </div>
                 </div>
             </div>}
+            
         </div>
 
     )

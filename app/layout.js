@@ -15,10 +15,9 @@ export default function RootLayout({ children }) {
       <body className="h-screen">
         <Navbar />
 
-        {/* Main container with flex-grow to take up remaining space */}
-        <div className="mx-auto px-0 w-full h-full ">
+        <main className="flex-grow pt-16 pr-6 ">
           {children}
-        </div>
+        </main>
 
         {/* <Footer /> */}
       </body>

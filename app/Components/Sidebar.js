@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Sidebar() {
     return (
-        <div className='inline-block fixed'>
+        <div className='inline-block fixed border-r-8  border-gray-800'>
             <aside className="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
                 <div className="flex flex-col items-center mt-6 -mx-2">
                     <img className="object-cover w-24 h-24 mx-2 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar"/>
