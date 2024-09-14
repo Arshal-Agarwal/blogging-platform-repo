@@ -1,4 +1,3 @@
-// app/api/test-connection.mjs
 import sequelize from '../lib/db.mjs';
 
 console.log('Starting script...');
