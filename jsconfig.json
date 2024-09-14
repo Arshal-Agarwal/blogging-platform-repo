@@ -1,7 +1,17 @@
 {
   "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["src/*"],  // Adjust based on your directory structure
+      "~/*": ["components/*"],  // Example of alias for components
+      "styles/*": ["styles/*"]   // Example of alias for styles
+    },
+    "jsx": "preserve",  // Preserve JSX for Next.js
+    "moduleResolution": "node",
+    "allowJs": true,    // Allow JavaScript files
+    "checkJs": true,    // Enable type checking for JavaScript files (optional)
+    "esModuleInterop": true
   }
 }

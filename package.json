@@ -2,7 +2,6 @@
   "name": "blogging-platform-repo",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,6 +17,14 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "@types/json5": "^0.0.30",
+    "@types/ms": "^0.7.34",
+    "@types/node": "^22.5.5",
+    "@types/semver": "^7.5.8",
+    "@types/sequelize": "^4.28.20",
+    "@types/tailwindcss": "^3.0.11",
+    "@types/validator": "^13.12.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.9",
     "postcss": "^8",

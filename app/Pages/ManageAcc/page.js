@@ -1,6 +1,5 @@
 "use client"
-import React, { useRef } from 'react'
-import Sidebar from '@/app/Components/Sidebar';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 export default function Page() {
     const emailRef = useRef(null);
