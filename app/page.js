@@ -8,7 +8,7 @@ export default function Home() {
 
       <div className='threadBox'>
        
-        
+        <br />
         <BlogThreadCard className="card"></BlogThreadCard>
         <BlogThreadCard className="card"></BlogThreadCard>
         <BlogThreadCard className="card"></BlogThreadCard>

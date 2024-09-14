@@ -6,6 +6,15 @@ export default function page() {
   return (
     <div>
       <Sidebar></Sidebar>
+      <br />
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
+      <BlogContentCard></BlogContentCard>
        </div>
   )
 }

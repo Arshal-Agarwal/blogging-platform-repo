@@ -45,7 +45,7 @@ const SignInPage = () => {
 
                 <Image
                   className=" sm:w-32 sm:h-32 rounded-xl"
-                  src="/logo1.png"
+                  src="/logo.png"
                   alt="Logo"
                   width={1024}
                   height={1024}
