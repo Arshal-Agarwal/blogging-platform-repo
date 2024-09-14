@@ -4,7 +4,7 @@ import BlogContentCard from 'app/Components/BlogThreadCard';
 
 export default function page() {
   return (
-    <div>
+    <div >
       <Sidebar></Sidebar>
       <br />
       <BlogContentCard></BlogContentCard>

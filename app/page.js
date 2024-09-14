@@ -1,5 +1,4 @@
 import React from "react";
-import Sidebar from "./Components/Sidebar";
 import BlogThreadCard from "./Components/BlogThreadCard";
 
 export default function Home() {
@@ -7,7 +6,7 @@ export default function Home() {
   return (
     <>
 
-      <div className='threadBox'>
+      <div className='threadBox mr-48'>
        
         <br />
         

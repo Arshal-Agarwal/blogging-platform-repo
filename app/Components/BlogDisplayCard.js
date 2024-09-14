@@ -8,7 +8,7 @@ export default function BlogDisplayCard() {
                 <span className="text-xs font-light text-gray-600 dark:text-gray-400">Tags</span>
                 <a
                     className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
-                    tabIndex="0"
+                    tabIndex={0}
                     role="button"
                 >
                     Category
