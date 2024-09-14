@@ -1,6 +1,6 @@
 import React from 'react'
-import Sidebar from '@/app/Components/Sidebar'
-import BlogContentCard from '@/app/Components/BlogThreadCard'
+import Sidebar from 'app/Components/Sidebar';
+import BlogContentCard from 'app/Components/BlogThreadCard';
 
 export default function page() {
   return (

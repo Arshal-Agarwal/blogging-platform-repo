@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function BlogContentCard() {
   return (
-    <div className="max-w-4xl  max-h-72 px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mb-10  mx-auto overflow-hidden">
+    <div className="w-3/5  max-h-72 px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mb-10  mx-auto overflow-hidden">
       <div className="flex items-center justify-between">
         <Image className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block" src="/logo.png" height={100} width={100} alt="avatar" />
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">u/Arshal11</span>
