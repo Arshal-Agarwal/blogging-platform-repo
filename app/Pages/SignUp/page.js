@@ -47,7 +47,7 @@ const SignupSection = () => {
                     password: '',
                     bio: ''
                 });
-                router.push('/signin');
+                router.push('SignIn');
 
             } else {
                 setError(data.error || 'Something went wrong');
