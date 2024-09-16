@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { generateAccessToken, generateRefreshToken } from 'app/lib/jwt';
 
 const prisma = new PrismaClient();
 
@@ -28,8 +29,23 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Invalid password.' }, { status: 401 });
         }
 
-        // Successful sign-in
-        return NextResponse.json({ message: 'Sign-in successful!' }, { status: 200 });
+        // Generate JWTs
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);
+
+        // Store refresh token in DB
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { refreshToken },
+        });
+
+        // Return the tokens and a success message
+        return NextResponse.json({
+            message: 'Sign-in successful!',
+            accessToken,
+            refreshToken
+        }, { status: 200 });
+
     } catch (error) {
         console.error('Sign-in error:', error);
         return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
