@@ -19,4 +19,13 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String  @db.Text
+  category  String
+  tags      String   // Comma-separated tags will be stored as a single string
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
