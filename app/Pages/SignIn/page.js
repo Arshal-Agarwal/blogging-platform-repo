@@ -1,23 +1,43 @@
-"use client"
+"use client";
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
-
+import { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SignInPage = () => {
+  const email_ref = useRef();
+  const password_ref = useRef();
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const router = useRouter();
 
-    const email_ref = useRef();
-    const password_ref = useRef();
+  async function SignInClick(e) {
+    e.preventDefault();
+    const email = email_ref.current.value;
+    const password = password_ref.current.value;
 
-    function SignInClick(e){
-        e.preventDefault();
-        console.log("sign in clicked");
-        let email=email_ref.current.value;
-        let password=password_ref.current.value;
-        console.log(email);
-        console.log(password);
+    try {
+      const response = await fetch('/api/users/signin/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess('Sign-in successful!');
+        // Navigate to the home page
+        router.push('/');
+      } else {
+        setError(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      setError('Failed to sign in. Please try again.');
     }
-
+  }
 
   return (
     <div className="bg-white dark:bg-gray-900">
@@ -32,7 +52,7 @@ const SignInPage = () => {
             <div>
               <h2 className="text-2xl font-bold text-white sm:text-3xl">Blog.</h2>
               <p className="max-w-xl mt-3 text-gray-300">
-              Welcome to Blog — where every voice finds its stage. Share your stories, insights, and passions with a vibrant community of readers and writers. Seamlessly blend creativity with simplicity, and let your words make an impact.
+                Welcome to Blog — where every voice finds its stage. Share your stories, insights, and passions with a vibrant community of readers and writers. Seamlessly blend creativity with simplicity, and let your words make an impact.
               </p>
             </div>
           </div>
@@ -42,9 +62,8 @@ const SignInPage = () => {
           <div className="flex-1">
             <div className="text-center">
               <div className="flex justify-center mx-auto">
-
                 <Image
-                  className=" sm:w-32 sm:h-32 rounded-xl"
+                  className="sm:w-32 sm:h-32 rounded-xl"
                   src="/logo.png"
                   alt="Logo"
                   width={1024}
@@ -85,11 +104,21 @@ const SignInPage = () => {
                 </div>
 
                 <div className="mt-6">
-                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={(e)=>SignInClick(e)}>
+                  <button
+                    type="button"
+                    className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    onClick={SignInClick}
+                  >
                     Sign in
                   </button>
                 </div>
 
+                {error && (
+                  <div className="mt-4 text-red-500">{error}</div>
+                )}
+                {success && (
+                  <div className="mt-4 text-green-500">{success}</div>
+                )}
               </form>
 
               <p className="mt-6 text-sm text-center text-gray-400">Don’t have an account yet? <Link href="../Pages/SignUp" className="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up</Link></p>
