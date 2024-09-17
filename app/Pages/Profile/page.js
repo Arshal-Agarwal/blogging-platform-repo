@@ -42,7 +42,7 @@ export default function Page() {
               content={post.content}
               category={post.category}
               author="Arshal11"  // Assuming a static author for now, replace with dynamic author if needed
-              slug={post.id}      // Assuming `post.id` is used for unique URL slug
+              id={post.id}      // Assuming `post.id` is used for unique URL slug
             />
           ))
         ) : (
