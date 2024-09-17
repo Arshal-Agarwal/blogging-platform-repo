@@ -1,7 +1,7 @@
 "use client";  // Mark this as a Client Component
 
 import React, { useEffect, useState } from "react";
-import BlogThreadCard from "./Components/BlogThreadCard";
+import BlogThreadCard from "./Components/BlogContentCard";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -32,6 +32,7 @@ export default function Home() {
         {posts.length > 0 ? (
           posts.map(post => (
             <BlogThreadCard
+              id={post.id}
               key={post.id}
               title={post.title}
               content={post.content}

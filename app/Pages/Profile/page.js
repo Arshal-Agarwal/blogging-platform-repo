@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from 'app/Components/Sidebar';
-import BlogContentCard from 'app/Components/BlogThreadCard';
+import BlogContentCard from 'app/Components/BlogContentCard';
 
 export default function Page() {
   const [posts, setPosts] = useState([]);
