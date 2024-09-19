@@ -1,25 +1,33 @@
-"use client"
-import React, { useRef, useState } from 'react'
+"use client";  // Marks this file as a Client Component
+
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { isAuthenticated } from 'app/utility/auth';
 
 export default function Compose() {
-
     const [showAlert, setshowAlert] = useState(false);
-    const [showTagInput, setshowTagInput] = useState(false);
-    const [showCategoryInput, setshowCategoryInput] = useState(false);
     const [blogContent, setblogContent] = useState("");
     const [Title, setTitle] = useState("");
     const [Tags, setTags] = useState("");
     const [Category, setCategory] = useState("");
 
-    let blog_ref = useRef();
-    let title_ref = useRef();
-    let tag_ref = useRef();
-    let cat_ref = useRef();
+    const blog_ref = useRef();
+    const title_ref = useRef();
+    const tag_ref = useRef();
+    const cat_ref = useRef();
+    const router = useRouter();
+
+    useEffect(() => {
+        // Redirect to sign-in page if not authenticated
+        if (!isAuthenticated()) {
+            router.push('/Pages/SignIn');
+        }
+    }, [router]);
 
     // Submit form and send data to backend
     async function submitClick() {
-        let Blog_Content = blog_ref.current.value;               
-        let Blog_Title = title_ref.current.value;  
+        let Blog_Content = blog_ref.current.value;
+        let Blog_Title = title_ref.current.value;
         let Blog_tags = tag_ref.current.value;
         let Blog_category = cat_ref.current.value;
 
@@ -67,7 +75,7 @@ export default function Compose() {
     }
 
     function blogChange(e) {
-        setblogContent(e.target.value)
+        setblogContent(e.target.value);
     }
 
     function titleChange(ev) {
@@ -84,37 +92,36 @@ export default function Compose() {
 
     return (
         <div className="min-w-64 pl-24 mt-4">
-
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
-            <input className="title w-3/4 p-2 border border-gray-300 rounded mt-2 block" 
-                ref={title_ref} 
-                type="text" 
-                value={Title} 
-                onChange={titleChange} 
-                placeholder='Enter Title here' 
+            <input className="title w-3/4 p-2 border border-gray-300 rounded mt-2 block"
+                ref={title_ref}
+                type="text"
+                value={Title}
+                onChange={titleChange}
+                placeholder='Enter Title here'
             />
 
-            <input className="tags w-1/4 p-2 border border-gray-300 rounded mt-10" 
-                ref={tag_ref} 
-                type="text" 
-                placeholder='Enter Tags' 
-                value={Tags} 
-                onChange={(e) => tagsChange(e)} 
+            <input className="tags w-1/4 p-2 border border-gray-300 rounded mt-10"
+                ref={tag_ref}
+                type="text"
+                placeholder='Enter Tags'
+                value={Tags}
+                onChange={(e) => tagsChange(e)}
             />
 
-            <input className="tags w-1/4 p-2 ml-12 border border-gray-300 rounded mt-10" 
-                ref={cat_ref} 
-                type="text" 
-                placeholder='Enter Category' 
-                value={Category} 
-                onChange={(e) => catsChange(e)} 
-            /> 
+            <input className="tags w-1/4 p-2 ml-12 border border-gray-300 rounded mt-10"
+                ref={cat_ref}
+                type="text"
+                placeholder='Enter Category'
+                value={Category}
+                onChange={(e) => catsChange(e)}
+            />
 
             <div className='pr-16 mt-8'>
-                <textarea ref={blog_ref} id="content" 
-                    onChange={(e) => blogChange(e)} 
-                    value={blogContent} 
-                    placeholder="Enter blog content" 
+                <textarea ref={blog_ref} id="content"
+                    onChange={(e) => blogChange(e)}
+                    value={blogContent}
+                    placeholder="Enter blog content"
                     className="block mt-2 w-full rounded-lg border border-gray-200 bg-white px-2 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-300">
                 </textarea>
             </div>
@@ -127,7 +134,7 @@ export default function Compose() {
                 Clear
             </button>
 
-            {showAlert && 
+            {showAlert &&
                 <div className="flex float-right ml-auto mr-16 max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <div className="flex items-center justify-center w-12 bg-emerald-500">
                         <svg className="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { generateAccessToken, generateRefreshToken } from 'app/lib/jwt';
+import { signToken, signRefreshToken } from 'app/utility/jwt';
 
 const prisma = new PrismaClient();
 
@@ -29,11 +29,11 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Invalid password.' }, { status: 401 });
         }
 
-        // Generate JWTs
-        const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
+        // Generate the access and refresh tokens
+        const accessToken = signToken(user);
+        const refreshToken = signRefreshToken(user);
 
-        // Store refresh token in DB
+        // Store the refresh token in the database
         await prisma.user.update({
             where: { id: user.id },
             data: { refreshToken },
