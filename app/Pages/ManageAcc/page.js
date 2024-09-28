@@ -1,6 +1,8 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { isAuthenticated } from 'app/utility/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
     const emailRef = useRef(null);
@@ -10,6 +12,15 @@ export default function Page() {
 
     const [emailMessage, setEmailMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
+
+    const router = useRouter();
+
+    useEffect(() => {
+        // Redirect to sign-in page if not authenticated
+        if (!isAuthenticated()) {
+            router.push('/Pages/SignIn');
+        }
+    }, [router]);
 
     async function handleSubmitEmail(event) {
         event.preventDefault();
@@ -22,7 +33,7 @@ export default function Page() {
         }
 
         try {
-            const response = await fetch('/api/users/profile/', {  
+            const response = await fetch('/api/users/profile/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +66,7 @@ export default function Page() {
         }
 
         try {
-            const response = await fetch('/api/users/profile/', { 
+            const response = await fetch('/api/users/profile/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
