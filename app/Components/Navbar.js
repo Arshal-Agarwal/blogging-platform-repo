@@ -14,12 +14,12 @@ const Navbar = () => {
     
 
     return (
-        <nav className=" bg-white shadow dark:bg-gray-800 fixed w-full z-50">
+        <nav className=" bg-white shadow-xl dark:bg-gray-800 fixed w-full z-50 ">
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
                         <Link href="/">
-                            <p className="heading font-bold text-3xl"  >Blog.</p>
+                            <p className="heading font-bold text-3xl text-black dark:text-zinc-50"  >Blog.</p>
                         </Link>
                         
                         {/* Mobile menu button */}

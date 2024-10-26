@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import BlogThreadCard from "./Components/BlogContentCard";
+import Sidebar from "./Components/Sidebar";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -27,7 +28,8 @@ export default function Home() {
 
   return (
     <>
-      <div className='threadBox mr-48'>
+      <Sidebar></Sidebar>
+      <div className='threadBox '>
         <br />
         {posts.length > 0 ? (
           posts.map(post => (
