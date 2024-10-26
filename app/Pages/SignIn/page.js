@@ -3,8 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import MyContext from 'app/contexts/LogInContext';
 
 const SignInPage = () => {
+
+  const {LogInState, setLogInState} = useContext(MyContext);
+
   const email_ref = useRef();
   const password_ref = useRef();
   const [error, setError] = useState('');
@@ -33,6 +38,8 @@ const SignInPage = () => {
         // Store tokens in localStorage
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
+
+        setLogInState(false);
 
         // Navigate to the home page
         router.push('/');

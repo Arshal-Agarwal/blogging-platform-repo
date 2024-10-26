@@ -1,10 +1,18 @@
 "use client"
 
+// import Image from "next/image";
 import Link from "next/link";
-import Image from "next/image";
+import { useContext } from "react";
+import MyContext from "app/contexts/LogInContext";
 
 
 const Navbar = () => {
+
+    const {LogInState, setLogInState} = useContext(MyContext);
+
+    console.log(LogInState + "  isvisble");
+    
+
     return (
         <nav className=" bg-white shadow dark:bg-gray-800 fixed w-full z-50">
             <div className="container px-6 py-4 mx-auto">
@@ -36,7 +44,9 @@ const Navbar = () => {
                             <Link href="/" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Home</Link>
                             <Link href="/Pages/Compose" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Compose Blog</Link>
                             <Link href="/Pages/Profile" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">My Profile</Link>
-                            <Link href="/Pages/SignIn" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Sign in</Link>
+                           
+                            
+                            {LogInState && <Link href="/Pages/SignIn" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Sign in</Link>}
 
                         </div>
 

@@ -1,6 +1,7 @@
 
 import "./globals.css";
 import Navbar from "./Components/Navbar";
+import { MyProvider } from "./contexts/LogInContext";
 
 
 
@@ -13,6 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="h-screen">
+        <MyProvider>
+
         <Navbar />
 
         <main className="flex-grow pt-16 ">
@@ -20,6 +23,8 @@ export default function RootLayout({ children }) {
         </main>
 
         {/* <Footer /> */}
+   
+        </MyProvider>
       </body>
     </html>
   );
