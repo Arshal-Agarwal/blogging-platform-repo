@@ -110,9 +110,7 @@ export default function Page() {
                                 <span className="mx-4 font-medium">Scroll Blogs</span>
                             </Link>
 
-                            <button className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
-                                <span className="mx-4 font-medium">Toggle Mode</span>
-                            </button>
+                            
                         </nav>
                     </div>
                 </aside>
