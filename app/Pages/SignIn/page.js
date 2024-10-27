@@ -1,20 +1,57 @@
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import MyContext from 'app/contexts/LogInContext';
 
 const SignInPage = () => {
-
-  const {LogInState, setLogInState} = useContext(MyContext);
+  const { LogInState, setLogInState } = useContext(MyContext);
 
   const email_ref = useRef();
   const password_ref = useRef();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const router = useRouter();
+
+  const phrases = ["Blog.", "Think it.", "Express it."];
+  const [displayText, setDisplayText] = useState("");
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [isErasing, setIsErasing] = useState(false);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isTypingPaused, setIsTypingPaused] = useState(false);
+
+  useEffect(() => {
+    if (isTypingPaused) {
+      const pauseTimeout = setTimeout(() => setIsTypingPaused(false), 100); // Longer pause duration
+      return () => clearTimeout(pauseTimeout);
+    }
+
+    const timeout = setTimeout(() => {
+      if (isErasing) {
+        if (charIndex > 0) {
+          setDisplayText((prev) => prev.slice(0, -1));
+          setCharIndex((prev) => prev - 1);
+        } else {
+          setIsErasing(false);
+          setIsTypingPaused(true); // Pause after erasing
+          setDisplayText(""); // Empty display between phrases
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      } else {
+        if (charIndex < phrases[currentPhraseIndex].length) {
+          setDisplayText((prev) => prev + phrases[currentPhraseIndex][charIndex]);
+          setCharIndex((prev) => prev + 1);
+        } else {
+          setIsErasing(true);
+          setIsTypingPaused(true); // Pause after typing
+        }
+      }
+    }, isErasing ? 200 : 200); // Slower effect
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isErasing, currentPhraseIndex, isTypingPaused, phrases]);
 
   async function SignInClick(e) {
     e.preventDefault();
@@ -34,14 +71,9 @@ const SignInPage = () => {
 
       if (response.ok) {
         setSuccess('Sign-in successful!');
-
-        // Store tokens in localStorage
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
-
         setLogInState(false);
-
-        // Navigate to the home page
         router.push('/');
       } else {
         setError(data.error || 'Something went wrong');
@@ -82,7 +114,16 @@ const SignInPage = () => {
                   height={1024}
                 />
               </div>
+
               <br />
+              <br />
+
+              <div className="h-8"> {/* Fixed height to prevent shifting */}
+                <p className="text-black text-3xl font-bold font-serif  dark:text-white">{displayText}</p>
+              </div>
+
+              <br />
+
             </div>
 
             <div className="mt-8">

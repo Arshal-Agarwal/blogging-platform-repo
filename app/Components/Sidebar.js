@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import MyContext from 'app/contexts/LogInContext';
+import Image from 'next/image';
 
 export default function Sidebar() {
     const { LogInState, setLogInState } = useContext(MyContext);
@@ -33,10 +34,20 @@ export default function Sidebar() {
     return (
         <div className='inline-block fixed border-r-8 border-gray-800 clear-both'>
             <aside className="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-                <div className="flex flex-col items-center mt-6 -mx-2">
+            <Image
+                  className="sm:w-32 sm:h-32 rounded-xl ml-10"
+                  src="/logo.png"
+                  alt="Logo"
+                  width={1024}
+                  height={1024}
+                />
+               
+                
+
+                {/* <div className="flex flex-col items-center mt-6 -mx-2">
                     <h4 className="mx-2 mt-2 font-bold text-gray-800 dark:text-gray-200">Arshal Agarwal</h4>
                     <p className="mx-2 mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">arshal.agarwal23@vit.edu</p>
-                </div>
+                </div> */}
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav>
