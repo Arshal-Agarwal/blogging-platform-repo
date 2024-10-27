@@ -5,17 +5,23 @@ import Sidebar from 'app/Components/Sidebar';
 import BlogContentCard from 'app/Components/BlogContentCard';
 import { isAuthenticated } from 'app/utility/auth';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import MyContext from 'app/contexts/LogInContext';
 
 export default function Page() {
+
+  const {LogInState, setLogInState} = useContext(MyContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
 
+  
+
   // Fetch all posts from the API
   useEffect(() => {
 
-    if (!isAuthenticated()) {
+    if (LogInState) {
       router.push('/Pages/SignIn');  // Redirect to sign-in page if not authenticated
       return;
     }

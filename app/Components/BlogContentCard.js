@@ -4,6 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function BlogContentCard({ title, content, category, author, id }) {
+
+  console.log(author);
+  
+
   return (
     <div className="w-4/6 max-h-72 px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mb-10 float-right mr-16 overflow-hidden">
       <div className="flex items-center justify-between">
@@ -17,7 +21,7 @@ export default function BlogContentCard({ title, content, category, author, id }
         <Link href={`/Pages/blog/${id}`} className="text-xl underline font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
           {title}
         </Link>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 overflow-hidden text-ellipsis max-h-24">{content.length > 200 ? content.substring(0, 200) + '...' : content}</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300 overflow-hidden text-ellipsis max-h-24">{content.length > 200 ? content.substring(0, 500) + '...' : content}</p>
       </div>
 
       <div className="flex items-center justify-between mt-4">

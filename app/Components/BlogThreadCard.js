@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function BlogContentCard({ title, content, category, author, slug }) {
+export default function BlogThreadCard({ title, content, category, author, slug }) {
   return (
 
 

@@ -1,7 +1,7 @@
 "use client";  // Mark this as a Client Component
 
 import React, { useEffect, useState } from "react";
-import BlogThreadCard from "./Components/BlogContentCard";
+import BlogContentCard from "./Components/BlogContentCard";
 import Sidebar from "./Components/Sidebar";
 
 export default function Home() {
@@ -26,6 +26,9 @@ export default function Home() {
     fetchPosts();
   }, []);
 
+  console.log(posts);
+  
+
   return (
     <>
       <Sidebar></Sidebar>
@@ -33,7 +36,7 @@ export default function Home() {
         <br />
         {posts.length > 0 ? (
           posts.map(post => (
-            <BlogThreadCard
+            <BlogContentCard
               id={post.id}
               key={post.id}
               title={post.title}
@@ -41,6 +44,7 @@ export default function Home() {
               category={post.category}
               tags={post.tags}
               createdAt={post.createdAt}
+              author={post.author}
             />
           ))
         ) : (

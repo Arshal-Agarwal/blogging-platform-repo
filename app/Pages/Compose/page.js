@@ -3,8 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { isAuthenticated } from 'app/utility/auth';
+import { useContext } from 'react';
+import MyContext from 'app/contexts/LogInContext';
 
 export default function Compose() {
+
+    const {LogInState, setLogInState} = useContext(MyContext);
     const [showAlert, setshowAlert] = useState(false);
     const [blogContent, setblogContent] = useState("");
     const [Title, setTitle] = useState("");
@@ -19,7 +23,9 @@ export default function Compose() {
 
     useEffect(() => {
         // Redirect to sign-in page if not authenticated
-        if (!isAuthenticated()) {
+        if (LogInState) {
+            console.log(LogInState+ " compose");
+            
             router.push('/Pages/SignIn');
         }
     }, [router]);
@@ -93,7 +99,7 @@ export default function Compose() {
     return (
         <div className="min-w-64 pl-24 mt-4">
             <label className='username text-xs' htmlFor="">User : u/Arshal11</label>
-            <input className="title w-3/4 p-2 border border-gray-300 rounded mt-2 block"
+            <input className="title w-3/4 p-2 text-slate-950 dark:bg-slate-200 border border-gray-300 rounded mt-2 block"
                 ref={title_ref}
                 type="text"
                 value={Title}
@@ -101,15 +107,15 @@ export default function Compose() {
                 placeholder='Enter Title here'
             />
 
-            <input className="tags w-1/4 p-2 border border-gray-300 rounded mt-10"
+            <input className="tags w-1/4 p-2 border text-slate-950  dark:bg-slate-200 border-gray-300 rounded mt-10"
                 ref={tag_ref}
                 type="text"
-                placeholder='Enter Tags'
+                placeholder='Enter Tag'
                 value={Tags}
                 onChange={(e) => tagsChange(e)}
             />
 
-            <input className="tags w-1/4 p-2 ml-12 border border-gray-300 rounded mt-10"
+            <input className="tags w-1/4 p-2 ml-12 border text-slate-950 dark:bg-slate-200 border-gray-300 rounded mt-10"
                 ref={cat_ref}
                 type="text"
                 placeholder='Enter Category'
@@ -122,7 +128,7 @@ export default function Compose() {
                     onChange={(e) => blogChange(e)}
                     value={blogContent}
                     placeholder="Enter blog content"
-                    className="block mt-2 w-full rounded-lg border border-gray-200 bg-white px-2 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-300">
+                    className="block mt-2 w-full text-slate-950 rounded-lg border dark:bg-slate-200 px-2 h-96 py-2.5 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-300">
                 </textarea>
             </div>
 
