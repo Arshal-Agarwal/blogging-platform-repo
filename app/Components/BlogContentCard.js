@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function BlogContentCard({ title, content, category, author, id }) {
+export default function BlogContentCard({ title, content, category, author, id , tags }) {
 
   console.log(author);
   

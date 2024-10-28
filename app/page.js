@@ -43,7 +43,6 @@ export default function Home() {
               content={post.content}
               category={post.category}
               tags={post.tags}
-              createdAt={post.createdAt}
               author={post.author}
             />
           ))
