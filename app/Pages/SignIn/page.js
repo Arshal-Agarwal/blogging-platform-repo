@@ -57,7 +57,7 @@ const SignInPage = () => {
     e.preventDefault();
     const email = email_ref.current.value;
     const password = password_ref.current.value;
-
+  
     try {
       const response = await fetch('/api/users/signin/', {
         method: 'POST',
@@ -66,13 +66,19 @@ const SignInPage = () => {
         },
         body: JSON.stringify({ email, password })
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         setSuccess('Sign-in successful!');
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
+  
+        // Store user information in localStorage
+        localStorage.setItem('user', JSON.stringify(email));
+        console.log("Logged-in User:", email);
+        
+  
         setLogInState(false);
         router.push('/');
       } else {
@@ -82,6 +88,7 @@ const SignInPage = () => {
       setError('Failed to sign in. Please try again.');
     }
   }
+  
 
   return (
     <div className="bg-white dark:bg-gray-900">

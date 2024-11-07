@@ -11,7 +11,7 @@ export default function BlogThreadCard({ title, content, category, author, slug 
 
       <div className="flex items-center justify-between">
         <Image className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block" src="/logo.png" height={100} width={100} alt="avatar" />
-        <span className="text-sm font-light text-gray-600 dark:text-gray-400">u/{author}</span>
+        <span className="text-sm font-light text-gray-600 dark:text-gray-400">u/</span>
         <p className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-default hover:bg-gray-500" tabIndex={0} role="button">{category}</p>
       </div>
 
