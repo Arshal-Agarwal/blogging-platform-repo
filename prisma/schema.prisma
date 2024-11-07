@@ -22,9 +22,10 @@ model User {
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
-  content   String  @db.Text
+  content   String   @db.Text
   category  String
   tags      String   // Comma-separated tags will be stored as a single string
+  email     String   // Email of the logged-in user who created the post
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

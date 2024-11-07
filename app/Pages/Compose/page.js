@@ -1,14 +1,11 @@
 "use client";  // Marks this file as a Client Component
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import { isAuthenticated } from 'app/utility/auth';
-import { useContext } from 'react';
 import MyContext from 'app/contexts/LogInContext';
 
 export default function Compose() {
-
-    const {LogInState, setLogInState} = useContext(MyContext);
+    const { LogInState, setLogInState } = useContext(MyContext);
     const [showAlert, setshowAlert] = useState(false);
     const [blogContent, setblogContent] = useState("");
     const [Title, setTitle] = useState("");
@@ -24,8 +21,6 @@ export default function Compose() {
     useEffect(() => {
         // Redirect to sign-in page if not authenticated
         if (LogInState) {
-            console.log(LogInState+ " compose");
-            
             router.push('/Pages/SignIn');
         }
     }, [router]);
@@ -36,6 +31,15 @@ export default function Compose() {
         let Blog_Title = title_ref.current.value;
         let Blog_tags = tag_ref.current.value;
         let Blog_category = cat_ref.current.value;
+
+        // Retrieve email from localStorage
+        const userEmail = localStorage.getItem("user");
+
+        // Check if email is available
+        if (!userEmail) {
+            console.error("User email not found in localStorage.");
+            return;
+        }
 
         console.log("Blog title: " + Blog_Title);
         console.log("Blog content: " + Blog_Content);
@@ -54,6 +58,7 @@ export default function Compose() {
                     content: Blog_Content,
                     category: Blog_category,
                     tags: Blog_tags.split(','), // Convert to an array
+                    email: userEmail,            // Pass the email here
                 }),
             });
 
@@ -107,7 +112,7 @@ export default function Compose() {
                 placeholder='Enter Title here'
             />
 
-            <input className="tags w-1/4 p-2 border text-slate-950  dark:bg-slate-200 border-gray-300 rounded mt-10"
+            <input className="tags w-1/4 p-2 border text-slate-950 dark:bg-slate-200 border-gray-300 rounded mt-10"
                 ref={tag_ref}
                 type="text"
                 placeholder='Enter Tag'
@@ -156,5 +161,5 @@ export default function Compose() {
                 </div>
             }
         </div>
-    )
+    );
 }

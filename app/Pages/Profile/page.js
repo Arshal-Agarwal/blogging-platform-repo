@@ -1,22 +1,18 @@
 "use client";  // Marks this file as a Client Component
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Sidebar from 'app/Components/Sidebar';
 import BlogContentCard from 'app/Components/BlogContentCard';
-import { isAuthenticated } from 'app/utility/auth';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
 import MyContext from 'app/contexts/LogInContext';
 
 export default function Page() {
 
-  const {LogInState, setLogInState} = useContext(MyContext);
+  const { LogInState } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
-
-  
 
   // Fetch all posts from the API
   useEffect(() => {
@@ -28,7 +24,17 @@ export default function Page() {
 
     async function fetchPosts() {
       try {
-        const response = await fetch('/api/posts/getall');  // Adjust the API route as per your setup
+        // Retrieve email from localStorage
+        const email = localStorage.getItem('user');
+
+        const response = await fetch('/api/posts/getallbyuser', {  // Adjust the API route as per your setup
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-user-email': email, // Pass the email in custom header
+          },
+        });
+
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
@@ -44,7 +50,7 @@ export default function Page() {
     }
 
     fetchPosts();
-  }, []);
+  }, [LogInState, router]);
 
   return (
     <div className="flex">

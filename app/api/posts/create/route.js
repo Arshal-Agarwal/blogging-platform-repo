@@ -6,11 +6,11 @@ export async function POST(req) {
     try {
         // Parse the request body
         const body = await req.json();
-        const { title, content, category, tags } = body;
+        const { title, content, category, tags, email } = body;
 
         // Check if all necessary fields are provided
-        if (!title || !content || !category || !tags) {
-            return new Response(JSON.stringify({ message: 'All fields are required.' }), {
+        if (!title || !content || !category || !tags || !email) {
+            return new Response(JSON.stringify({ message: 'All fields, including email, are required.' }), {
                 status: 400,
             });
         }
@@ -25,6 +25,7 @@ export async function POST(req) {
                 content,
                 category,
                 tags: tagsString, // Store tags as a comma-separated string
+                email,             // Store email of the logged-in user
             },
         });
 

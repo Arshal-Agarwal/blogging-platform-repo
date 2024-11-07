@@ -28,6 +28,8 @@ export default function Page() {
         const email = emailRef.current?.value;
         const newEmail = newEmailRef.current?.value;
 
+        localStorage.setItem('user', newEmail);
+
         if (!email || !newEmail) {
             setEmailMessage('Please provide both current and new email.');
             return;
@@ -144,7 +146,7 @@ export default function Page() {
                         >
                             Update email
                         </button>
-                        <span className="text-red-500">{emailMessage}</span>
+                        <span className="text-green-500">{emailMessage}</span>
 
                         <button
                             onClick={handleSubmitPassword}
@@ -152,7 +154,7 @@ export default function Page() {
                         >
                             Update password
                         </button>
-                        <span className="text-red-500">{passwordMessage}</span>
+                        <span className="text-green-500">{passwordMessage}</span>
                     </div>
                 </form>
             </section>

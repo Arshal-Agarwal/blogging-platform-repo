@@ -1,94 +1,58 @@
 // app/api/users/profile/route.js
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { withAuth } from 'app/middleware/authMiddleware';
 
 const prisma = new PrismaClient();
 
-export async function GET(req) {
-    try {
-        // Get user info from JWT
-        const user = await withAuth(req);
-        if (user.error) {
-            return new Response(JSON.stringify({ message: user.error }), { status: 401 });
-        }
-
-        // Fetch the user's profile data
-        const userProfile = await prisma.user.findUnique({
-            where: { id: user.id }, // Ensure we only fetch the current user's profile
-            select: { id: true, email: true, name: true, createdAt: true } // Customize fields as needed
-        });
-
-        if (!userProfile) {
-            return new Response(JSON.stringify({ message: 'User profile not found.' }), { status: 404 });
-        }
-
-        return new Response(JSON.stringify({ userProfile }), { status: 200 });
-    } catch (error) {
-        console.error('Profile fetch error:', error);
-        return new Response(JSON.stringify({ message: 'Internal server error.' }), { status: 500 });
-    }
-}
-
 export async function POST(req) {
     try {
-        // Get user info from JWT
-        const user = await withAuth(req);
-        if (user.error) {
-            return new Response(JSON.stringify({ message: user.error }), { status: 401 });
-        }
+        const { email, newEmail, password, newPassword } = await req.json();
 
-        // Extract user details from request body
-        const { email, password, newEmail, newPassword } = await req.json();
-
-        // Check if email is provided for finding user
+        // Validate that current email is provided
         if (!email) {
-            return new Response(JSON.stringify({ message: 'Email is required' }), { status: 400 });
+            return new Response(JSON.stringify({ message: 'Current email is required.' }), { status: 400 });
         }
 
-        // Find the user by email
-        const existingUser = await prisma.user.findUnique({
+        // Find the user by current email
+        const user = await prisma.user.findUnique({
             where: { email }
         });
 
-        if (!existingUser) {
-            return new Response(JSON.stringify({ message: 'User not found' }), { status: 404 });
+        if (!user) {
+            return new Response(JSON.stringify({ message: 'User not found.' }), { status: 404 });
         }
 
-        // Ensure user is trying to update their own profile
-        if (existingUser.id !== user.id) {
-            return new Response(JSON.stringify({ message: 'Forbidden' }), { status: 403 });
-        }
-
-        // Handle email update
+        // Handle email update if newEmail is provided
         if (newEmail) {
             await prisma.user.update({
-                where: { id: user.id },
+                where: { email },
                 data: { email: newEmail }
             });
-            return new Response(JSON.stringify({ message: 'Email Updated Successfully' }), { status: 200 });
+            return new Response(JSON.stringify({ message: 'Email updated successfully.' }), { status: 200 });
         }
 
-        // Handle password update
+        // Handle password update if both current password and new password are provided
         if (password && newPassword) {
-            const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+            // Check if the current password matches
+            const isPasswordValid = await bcrypt.compare(password, user.password);
             if (!isPasswordValid) {
-                return new Response(JSON.stringify({ message: 'Incorrect password' }), { status: 401 });
+                return new Response(JSON.stringify({ message: 'Incorrect current password.' }), { status: 401 });
             }
 
+            // Hash the new password and update
             const hashedNewPassword = await bcrypt.hash(newPassword, 10);
             await prisma.user.update({
-                where: { id: user.id },
+                where: { email },
                 data: { password: hashedNewPassword }
             });
-            return new Response(JSON.stringify({ message: 'Password Updated Successfully' }), { status: 200 });
+            return new Response(JSON.stringify({ message: 'Password updated successfully.' }), { status: 200 });
         }
 
-        // If neither email nor password is provided to update
-        return new Response(JSON.stringify({ message: 'No fields to update' }), { status: 400 });
+        // No fields to update if neither newEmail nor newPassword provided
+        return new Response(JSON.stringify({ message: 'No fields to update.' }), { status: 400 });
 
     } catch (error) {
-        console.error('Error updating user:', error);
-        return new Response(JSON.stringify({ message: 'Failed to update user.' }), { status: 500 });
+        console.error('Error updating user profile:', error);
+        return new Response(JSON.stringify({ message: 'Failed to update profile.' }), { status: 500 });
     }
 }
