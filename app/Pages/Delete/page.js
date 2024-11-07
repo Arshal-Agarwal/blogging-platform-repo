@@ -1,9 +1,12 @@
 "use client";
 import React, { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import Sidebar from "app/Components/Sidebar";
+import MyContext from 'app/contexts/LogInContext';
 
 export default function Delete() {
+  const { LogInState, setLogInState } = useContext(MyContext);
   const text_ref = useRef();
   const router = useRouter();
 
@@ -29,6 +32,7 @@ export default function Delete() {
         });
 
         if (response.ok) {
+          setLogInState(true);
           alert("User deleted successfully.");
 
           // Optionally, clear localStorage or redirect
