@@ -32,52 +32,65 @@ export default function Compose() {
         let Blog_tags = tag_ref.current.value;
         let Blog_category = cat_ref.current.value;
 
-        // Retrieve email from localStorage
-        const userEmail = localStorage.getItem("user");
-
-        // Check if email is available
-        if (!userEmail) {
-            console.error("User email not found in localStorage.");
-            return;
+        if (Blog_category == "") {
+            alert("Enter Category , Trigger 1 Implemented , SQL STATE - 45000");
         }
-
-        console.log("Blog title: " + Blog_Title);
-        console.log("Blog content: " + Blog_Content);
-        console.log("Blog tags: " + Blog_tags);
-        console.log("Blog category: " + Blog_category);
-
-        // Send data to backend
-        try {
-            const response = await fetch('/api/posts/create/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    title: Blog_Title,
-                    content: Blog_Content,
-                    category: Blog_category,
-                    tags: Blog_tags.split(','), // Convert to an array
-                    email: userEmail,            // Pass the email here
-                }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Post created:", data);
-                setshowAlert(true);
-                
-                await delay(1000);
-
-                onClearClick();
-                router.push("/Pages/Profile") // Clear form after success
-            } else {
-                console.error('Failed to create post');
+        else {
+            if (Blog_tags == "") {
+                alert("Enter Tags , Trigger 2 Implemented , SQL STATE - 45000");
             }
-        } catch (error) {
-            console.error('Error creating post:', error);
+
+            else {
+
+                // Retrieve email from localStorage
+                const userEmail = localStorage.getItem("user");
+
+                // Check if email is available
+                if (!userEmail) {
+                    console.error("User email not found in localStorage.");
+                    return;
+                }
+
+                console.log("Blog title: " + Blog_Title);
+                console.log("Blog content: " + Blog_Content);
+                console.log("Blog tags: " + Blog_tags);
+                console.log("Blog category: " + Blog_category);
+
+                // Send data to backend
+                try {
+                    const response = await fetch('/api/posts/create/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            title: Blog_Title,
+                            content: Blog_Content,
+                            category: Blog_category,
+                            tags: Blog_tags.split(','), // Convert to an array
+                            email: userEmail,            // Pass the email here
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log("Post created:", data);
+                        setshowAlert(true);
+
+                        await delay(1000);
+
+                        onClearClick();
+                        router.push("/Pages/Profile") // Clear form after success
+                    } else {
+                        console.error('Failed to create post');
+                    }
+                } catch (error) {
+                    console.error('Error creating post:', error);
+                }
+            }
         }
     }
+
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 

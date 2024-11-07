@@ -54,7 +54,7 @@ export default function Delete() {
       <div className="text-black flex mt-32 float-right mr-96 ">
         <div className="w-72">
           <label className="text-gray-700 dark:text-gray-200" htmlFor="email">
-            Enter Email
+            Confirm Email
           </label>
           <br />
           <input
