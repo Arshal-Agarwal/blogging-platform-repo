@@ -66,10 +66,11 @@ export default function Compose() {
                 const data = await response.json();
                 console.log("Post created:", data);
                 setshowAlert(true);
-                setTimeout(() => {
-                    setshowAlert(false);
-                }, 1500);
-                onClearClick(); // Clear form after success
+                
+                await delay(1000);
+
+                onClearClick();
+                router.push("/Pages/Profile") // Clear form after success
             } else {
                 console.error('Failed to create post');
             }
@@ -77,6 +78,8 @@ export default function Compose() {
             console.error('Error creating post:', error);
         }
     }
+
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     function onClearClick() {
         setTitle("");

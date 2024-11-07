@@ -32,6 +32,7 @@ export default async function BlogPostPage({ params }) {
                     category={blogData.category}
                     tags={blogData.tags}
                     likeCount={blogData.likeCount}
+                    email={blogData.email}
                 />
             </div>
         );
