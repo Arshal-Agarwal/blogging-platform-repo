@@ -47,14 +47,14 @@ const AboutDevs = () => {
                     />
                     <h3 className="mt-4 text-lg font-bold text-gray-900 sm:text-xl text-center">Avishkar Sonpipare</h3>
                     <p className="mt-2 max-w-sm text-sm text-gray-700 text-center">
-                        ML prodigy and backend enthusiast with comprehensive knowledge of MySQL and Ml algorithms. 
+                        ML prodigy and backend enthusiast with comprehensive knowledge of MySQL and ML algorithms. 
                     </p>
                 </div>
 
                 <div className='pt-12  bg-slate-100 pb-6 w-96 rounded-md shadow-xl  flex flex-col items-center'>
                     <Image
                         alt="none"
-                        src="/"
+                        src="/avanti.jpg"
                         height={250}
                         width={250}
                         className="rounded-xl"
