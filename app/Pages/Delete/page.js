@@ -15,7 +15,7 @@ export default function Delete() {
     let storedEmail = localStorage.getItem("user")?.trim(); // Trim the stored value as well
     
     // Clean up the quotes around the stored email, if any
-    storedEmail = storedEmail?.substring(1, storedEmail.length - 1);
+    // storedEmail = storedEmail?.substring(1, storedEmail.length - 1);
 
     // Compare without extra spaces
     if (storedEmail === emailInput) {

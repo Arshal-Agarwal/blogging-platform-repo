@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 
 export default function Sidebar() {
+    let email = localStorage.getItem('user');
     const { LogInState, setLogInState } = useContext(MyContext);
     const [username, setUsername] = useState('');
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -30,9 +31,12 @@ export default function Sidebar() {
 
     // Fetch the username based on the email stored in localStorage
     useEffect(() => {
-        let email = localStorage.getItem('user');
-        email = email.substring(1,email.length-1);
-        console.log(email);
+        if(!email){
+            console.log("no email");   
+        }
+        else{
+        // email = email.substring(1,email.length-1);
+        console.log(email);}
         
 
         const fetchUsername = async () => {
@@ -86,7 +90,7 @@ export default function Sidebar() {
                         </div>
                         
                         <div className="flex items-center  py-2  text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400">
-                            <span className="mx-4 font-2xl">{localStorage.getItem('user').substring(1,(localStorage.getItem('user')).length-1)}</span>
+                            <span className="mx-4 font-2xl">{email ? `${email}` : ""}</span>
                         </div>
 
                         {!LogInState && (

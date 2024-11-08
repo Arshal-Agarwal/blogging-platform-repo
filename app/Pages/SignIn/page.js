@@ -75,7 +75,7 @@ const SignInPage = () => {
         localStorage.setItem('refreshToken', data.refreshToken);
   
         // Store user information in localStorage
-        localStorage.setItem('user', JSON.stringify(email));
+        localStorage.setItem('user', email);
         console.log("Logged-in User:", email);
         
   
