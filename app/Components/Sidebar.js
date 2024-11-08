@@ -85,13 +85,15 @@ export default function Sidebar() {
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav>
                         {/* Display fetched username */}
-                        <div className="flex items-center text-2xl font-extrabold px-4 py-2 mt-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400">
-                            <span className="mx-4 font-2xl">{username ? `${username}` : ""}</span>
+                        <div className="flex items-center text-2xl font-extrabold px py-2 mt-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400">
+                            <span className="mx-auto font-2xl">{username ? `${username}` : ""}</span>
                         </div>
                         
                         <div className="flex items-center  py-2  text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400">
-                            <span className="mx-4 font-2xl">{email ? `${email}` : ""}</span>
+                            <span className="mx-auto font-2xl">{email ? `${email}` : ""}</span>
                         </div>
+
+                        <hr className='mt-2'/>
 
                         {!LogInState && (
                             <Link className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/Pages/ManageAcc">
